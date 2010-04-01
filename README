@@ -1,0 +1,7 @@
+The BrowserPlus Uploader Widget
+
+This is a javascript library that wraps the BrowserPlus API and that of several
+services to provide a high level library which you can drop into a page to 
+create a better upload experience that's (mostly) compatible with typical 
+server scripts that handle HTML/browser based uploads.
+

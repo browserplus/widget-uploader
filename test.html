@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title> Multi-File Generic B+ Uploader </title>
+  <style type="text/css" media="screen">
+    #smallDiv { width: 400px; height:200px; }
+    #mediumDiv { width: 600px; height:300px; }
+    #results {height:200px; width:750px; overflow-y:auto;font-size:8pt;font-family:monospace;}
+  </style>
+
+</head>
+<body>
+  <h3> Upload 1 - Default Look and Feel</h3>
+  <div id="smallDiv"></div>
+
+  <h3> Upload 2 - Customized Look and Feel</h3>
+  <div id="mediumDiv"></div>
+
+  <h3>Uploader Events</h3>
+  <div id="results"></div>
+
+<script type="text/javascript" src="../../src/browserplus.js"></script>
+<!-- XXX: <script type="text/javascript" src="/static/js/temp_bp.js"></script> -->
+<script type="text/javascript" src="uploader.js"></script>  
+<script class="javascript">
+var fileCallback = function(res) {
+    var msg, results = document.getElementById("results");
+
+    if (res.success) {
+        msg = "{id: " + res.id + ", action:" + res.action + ", name:" + res.name + ", size:" + res.size + ", uuid:" + res.uuid + "}";
+    } else {
+        msg = "<span style=\"color:red\">ERROR(" + res.id + "), upload failed: " + res.error + " - " + res.verboseError + "</span>";
+    }
+
+    results.innerHTML = "<div>" + msg + "</div>" + results.innerHTML;
+};
+
+var postCB = function(uuid) {
+    return { description: "fake file description"};
+}
+var uploader = BPTool.Uploader.create("smallDiv", {
+    uploadUrl: "upload.php",
+    fileCB: fileCallback});
+
+uploader.render();
+
+uploader = BPTool.Uploader.create("mediumDiv", {
+    uploadUrl: "upload.php", 
+    fileCB: fileCallback,
+    postCB: postCB,
+    fileBackground: "#666",
+    uploadBackground:"#000", 
+    titleColor:"#fff", 
+    footerBackground:"#333",
+    fileColor:"#ccc",
+    hoverBackground: "#999",
+    selectBackground: "#d70",
+    footerColor:"silver"});
+
+uploader.render();
+</script>
+
+</body>
+</html>
