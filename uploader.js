@@ -514,11 +514,16 @@ BPTool.Uploader = typeof BPTool.Uploader != "undefined" && BPTool.Uploader ? BPT
                                         fireActionListener(droppedFiles, ACTION.UPLOAD,
                                                            res.success, res.value, 
                                                            res.error, res.verboseError);
-                    droppedFiles = [];
+                                        droppedFiles = [];
                                         renderCoreUI();
                                     }
                                 });
                         } else {
+                            var oldDroppedFiles = droppedFiles;
+                            droppedFiles = [];
+                            for (var i = 0; i < oldDroppedFiles.length; i++) {
+                                droppedFiles.push(oldDroppedFiles[i].file);
+                            }
                             startUpload();
                         }
 
